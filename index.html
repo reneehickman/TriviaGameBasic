@@ -11,39 +11,60 @@
 </head>
 
 <body>
+
     <div class="container-fluid contentWrap pl-0 pr-0">
-        <div class="container-fluid" id="header">
+
+            <!--Holds header image--->
             <header class="container-fluid">
                 <img src="assets/images/head1.png" id="headerImg">
             </header>
-        </div>
-        <div class="container gameContent"><!--Holds all game content--->
+
+        <!--Holds all game content--->
+        <div class="container gameContainer">
             <div class="row">
-                <div class="col-sm-12 contentCol">
+                <div class="col-sm-8 contentCol">
 
-                    <div class="container contentWrapper">
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <p id="activeQuestion">
-
-                                </p>
-                            </div>
-                        </div><!--end of question row-->
+                    <!--holds instructions and start button for user to start game-->
+                    <div class="start" id="startPage">
+                        <h2>Test your knowledge on Astrology</h2>
+                        <p>You have 120 seconds to answer all the questions. Good luck!</p>
+                        <div class="btn btn-primary" id="startButton">Start
+                        </div>
                     </div>
 
-                </div><!--end of content container col-->
+                    <!--holds game content that shows after the users presses start-->    
+                    <div class="game" id="gameContent">
+                            <div id="timer">
+                                <h4>Time Remaining:<span id="timeRemaining"></span></h4>
+                                </div>
 
+                        <div id="questionsList">
+                        </div>
 
+                        <div class="btn btn-primary" id="doneButton">Done
+                            </div>
+                    </div>
+
+                    <!--holds result values and is shown at the end of the game-->
+                    <div class="results" id="resultsPage">
+                        <h2>Here are your results:</h2>
+                        <p>Correct Answers:<span id="correctAnswers"></span></p>
+                        <p>Incorrect Answers:<span id="incorrectAnswers"></span></p>
+                        <p>Unanswered Questions:<span id="unansweredQuestions"></span></p>
+                    </div>
+
+                <!--end of col-->       
+                </div>
+
+            <!--end of row-->
             </div>
+            
+        <!--end of gamecontent container-->    
         </div>
 
-        <!-- <div class="container-fluid footer">
-            <div class="container foot">
-                <footer class="text-center mt-3 pt-4">Copyright&copy;</footer>
-            </div>
-        </div> -->
+    <!--end of contentwrap fluid-->    
     </div>
+    
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

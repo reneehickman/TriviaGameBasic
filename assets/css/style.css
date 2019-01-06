@@ -17,11 +17,13 @@ body{
 .contentCol{
     background:#ddd;
     opacity:.9;
+    margin:0px auto;
 }
 
-#header{
+header{
     text-align:center;
     /* background:rgba(255, 255, 255, .2); */
+    padding-bottom:7px;
 }
 
 #headerImg{
@@ -29,11 +31,19 @@ body{
     padding:10px 0px;
 }
 
-
-
-.contentWrapper{
-    padding:20px;
+.game{
+    text-align:center;
 }
+
+.start{
+    text-align:center;
+}
+
+.results{
+    text-align:center;
+}
+
+
 
 
 

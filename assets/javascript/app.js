@@ -1,3 +1,7 @@
+
+
+
+
 var triviaQuestions =
 [
   {
@@ -52,3 +56,37 @@ var triviaQuestions =
     correct: 3
   }
 ]
+
+
+
+var correctAnswers = $('#correctAnswers');
+var incorrectAnswers = $('#incorrectAnswers');
+var unansweredQuestions = $('#unansweredQuestions');
+var startPage = $('#startPage');
+var startButton = $('#startButton');
+
+
+
+$(document).ready(function(){
+
+    $('#startButton').on('click', gamePlay.startTime);
+
+});
+
+
+var gamePlay = {
+
+    timer: 120,
+
+    startTime: function() {
+        $('#timeRemaining').text(gamePlay.timer);
+        $('#startPage').hide();
+    },
+    
+}
+
+
+
+
+
+
