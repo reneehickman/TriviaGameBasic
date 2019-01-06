@@ -1,5 +1,16 @@
 
 
+// for (var i = 0; i < triviaQuestions.length; i++){
+// correctAnswer = triviaQuestions.answerChoices[i];
+// console.log(correctAnswer);
+// };
+
+
+
+// var correctAnswers = $('#correctAnswers');
+// var incorrectAnswers = $('#incorrectAnswers');
+// var unansweredQuestions = $('#unansweredQuestions');
+
 
 
 var triviaQuestions =
@@ -59,34 +70,96 @@ var triviaQuestions =
 
 
 
-var correctAnswers = $('#correctAnswers');
-var incorrectAnswers = $('#incorrectAnswers');
-var unansweredQuestions = $('#unansweredQuestions');
-var startPage = $('#startPage');
-var startButton = $('#startButton');
+window.onload = function(){
+    var startButton = $('#startButton');
+    startButton.on("click", gamePlay.startTime);
 
-
-
-$(document).ready(function(){
-
-    $('#startButton').on('click', gamePlay.startTime);
-
-});
+};
 
 
 var gamePlay = {
 
+    //sets timer to 120 seconds
     timer: 120,
 
+    //at start of game, start timer, hide start page, hide results page
     startTime: function() {
-        $('#timeRemaining').text(gamePlay.timer);
+        $('#timeRemaining').html(gamePlay.timer);
         $('#startPage').hide();
+        setInterval(gamePlay.countdown, 1000);
+        triviaContent.displayTriviaQuestions();
     },
+
+    //decrease timer and when timer gets to 0, hide time and get results
+    countdown: function(){
+        gamePlay.timer--;
+        $('#timeRemaining').html(gamePlay.timer);
+        if (gamePlay.timer === 0){
+            gamePlay.stopTime;
+            $('#timeRemaining').empty();
+        }
+    },
+
+    //stop time and get results
+    stopTime: function(){
+        clearInterval();
+        triviaContent.getResults();
+    },
+
+
+    showResultsPage: function(){
+        $('#resultsPage').show();
+        $('#gameContent').hide();
+        $('#correctAnswers').html(correctAnswers);
+        $('#incorrectAnswers').html(incorrectAnswers);
+        $('#unansweredQuestions').html(unansweredQuestions);  
+
+    }
     
 }
 
 
+var triviaContent = {
+    displayTriviaQuestions: function(){
+        var container = $('#questionsList');
+        container.append('<h3>Answer the following questions:</h3>');
+        var answers = $('.form-check');
+
+        for (var i = 0; i < triviaQuestions.length; i++){
+            container.append('<div id="question">' + triviaQuestions[i].question + '</div>');
+        
+            var answer1 = triviaQuestions[i].answerChoices[0];
+            var answer2 = triviaQuestions[i].answerChoices[1];
+            var answer3 = triviaQuestions[i].answerChoices[2];
+            var answer4 = triviaQuestions[i].answerChoices[3];
+
+            container.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-button'+i+'" id="button'+i+'"><label class="form-check-label" id="button'+i+'label" for="radioButton'+i+'">' + answer1 + '</label></div>');
+            container.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-button'+i+'" id="button'+i+'"><label class="form-check-label" id="button'+i+'label" for="radioButton'+i+'">' + answer2 + '</label></div>');
+            container.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-button'+i+'" id="button'+i+'"><label class="form-check-label" id="button'+i+'label" for="radioButton'+i+'">' + answer3 + '</label></div>');
+            container.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-button'+i+'" id="button'+i+'"><label class="form-check-label" id="button'+i+'label" for="radioButton'+i+'">' + answer4 + '</label></div>');
+        }
+
+        var doneButton = $('#doneButton');
+        container.append(doneButton);
+        doneButton.on('click', gamePlay.stopTime);
 
 
+    },
+
+    getResults: function(){
+        var correctAnswer;
+        var userAnswer;
+        var correctAnswers = 0;
+        var incorrectAnswers = 0;
+        var unansweredQuestions = 0;
+
+
+    // for (var i = 0; i < triviaQuestions.length; i++){
+    //     correctAnswer = triviaQuestions[i].answerChoices[correct];
+    //     userAnswer = 
+    // }
+
+    },
+};
 
 
