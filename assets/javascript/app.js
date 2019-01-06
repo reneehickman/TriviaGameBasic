@@ -79,41 +79,55 @@ window.onload = function(){
 
 var gamePlay = {
 
-    //sets timer to 120 seconds
-    timer: 120,
-
     //at start of game, start timer, hide start page, hide results page
     startTime: function() {
+        var timeContain = $('#directionsText');
+        timeContain.append('<h3>Answer the following questions:</h3>');
+        $('#gameContent').show();
         $('#timeRemaining').html(gamePlay.timer);
         $('#startPage').hide();
         setInterval(gamePlay.countdown, 1000);
         triviaContent.displayTriviaQuestions();
     },
 
+     //sets timer to 120 seconds
+     timer: 5,
+
     //decrease timer and when timer gets to 0, hide time and get results
     countdown: function(){
         gamePlay.timer--;
         $('#timeRemaining').html(gamePlay.timer);
         if (gamePlay.timer === 0){
-            gamePlay.stopTime;
-            $('#timeRemaining').empty();
+            gamePlay.stopTimer();
         }
     },
 
     //stop time and get results
-    stopTime: function(){
+    stopTimer: function(){
         clearInterval();
-        triviaContent.getResults();
+        $('#timer').empty();
+        $('#gameContent').hide();
+        $('#resultsPage').show();
+        triviaContent.checkAnswers();
     },
 
 
     showResultsPage: function(){
         $('#resultsPage').show();
         $('#gameContent').hide();
+        $("#questionsList").empty();
         $('#correctAnswers').html(correctAnswers);
         $('#incorrectAnswers').html(incorrectAnswers);
         $('#unansweredQuestions').html(unansweredQuestions);  
 
+        var playAgainButton = $('#playAgainButton');
+        playAgainButton.on('click', gamePlay.restartGame);
+
+    },
+
+    restartGame: function(){
+        $('#gameContent').show();
+        $('#playAgainButton').on("click", gamePlay.startTime);
     }
     
 }
@@ -122,7 +136,6 @@ var gamePlay = {
 var triviaContent = {
     displayTriviaQuestions: function(){
         var container = $('#questionsList');
-        container.append('<h3>Answer the following questions:</h3>');
         var answers = $('.form-check');
 
         for (var i = 0; i < triviaQuestions.length; i++){
@@ -140,13 +153,13 @@ var triviaContent = {
         }
 
         var doneButton = $('#doneButton');
-        container.append(doneButton);
-        doneButton.on('click', gamePlay.stopTime);
+        // container.append(doneButton);
+        doneButton.on('click', gamePlay.stopTimer);
 
 
     },
 
-    getResults: function(){
+    checkAnswers: function(){
         var correctAnswer;
         var userAnswer;
         var correctAnswers = 0;

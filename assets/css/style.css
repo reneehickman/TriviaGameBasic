@@ -11,6 +11,7 @@ body{
     background-size:cover;
     background-position:top;
     min-height:100vh;
+    font-size:1em;
 }
 
 
@@ -18,6 +19,7 @@ body{
     background:#ddd;
     opacity:.9;
     margin:0px auto;
+    margin-bottom:40px;
 }
 
 header{
@@ -37,12 +39,47 @@ header{
 
 .start{
     text-align:center;
+    padding:100px 0px;
 }
 
 .results{
     text-align:center;
 }
 
+
+
+#question{
+    padding-top:20px;
+    text-align:left;
+    padding-left:30px;
+    font-weight:bold;
+    padding-right:20px;
+    }
+
+ .form-check{
+     text-align:left;
+    padding-left:50px;
+    padding-bottom:5px;
+ }    
+
+#resultsPage{
+    display:none;
+    padding-top:20px;
+    padding-bottom:20px;
+}    
+
+
+#gameContent{
+    display:none;
+}
+
+#directionsText{
+    padding-top:20px;
+}
+
+#doneButton{
+    margin-bottom:20px;
+};
 
 
 
