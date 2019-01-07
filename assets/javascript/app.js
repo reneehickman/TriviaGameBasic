@@ -68,7 +68,7 @@ var triviaQuestions =
   }
 ]
 
-var timer = 5;
+var timer = 120;
 var interval;
 
 var gamePlay = {
@@ -118,7 +118,7 @@ var gamePlay = {
     },
 
     restartGame: function(){
-        timer = 5;
+        timer = 120;
         $('#timeRemaining').html(timer);
         gamePlay.startTime();
 
