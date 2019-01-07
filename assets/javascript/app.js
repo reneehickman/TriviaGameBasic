@@ -68,69 +68,63 @@ var triviaQuestions =
   }
 ]
 
-
-
-window.onload = function(){
-    var startButton = $('#startButton');
-    startButton.on("click", gamePlay.startTime);
-
-};
-
+var timer = 5;
+var interval;
 
 var gamePlay = {
+
+    // //sets timer to 120 seconds
+    // timer: 5,
 
     //at start of game, start timer, hide start page, hide results page
     startTime: function() {
         var timeContain = $('#directionsText');
         timeContain.append('<h3>Answer the following questions:</h3>');
         $('#gameContent').show();
-        $('#timeRemaining').html(gamePlay.timer);
+        $('#timeRemaining').html(timer);
         $('#startPage').hide();
-        setInterval(gamePlay.countdown, 1000);
+        $('#resultsPage').hide();
+        interval = setInterval(gamePlay.countdown, 1000);
         triviaContent.displayTriviaQuestions();
     },
 
-     //sets timer to 120 seconds
-     timer: 5,
 
     //decrease timer and when timer gets to 0, hide time and get results
     countdown: function(){
-        gamePlay.timer--;
-        $('#timeRemaining').html(gamePlay.timer);
-        if (gamePlay.timer === 0){
+        timer--;
+        $('#timeRemaining').html(timer);
+        if (timer === 0){
             gamePlay.stopTimer();
         }
     },
 
     //stop time and get results
     stopTimer: function(){
-        clearInterval();
-        $('#timer').empty();
+        clearInterval(interval);
+        $('#directionsText').empty();
         $('#gameContent').hide();
         $('#resultsPage').show();
         triviaContent.checkAnswers();
     },
 
-
+    //show results page
     showResultsPage: function(){
         $('#resultsPage').show();
         $('#gameContent').hide();
         $("#questionsList").empty();
         $('#correctAnswers').html(correctAnswers);
         $('#incorrectAnswers').html(incorrectAnswers);
-        $('#unansweredQuestions').html(unansweredQuestions);  
-
-        var playAgainButton = $('#playAgainButton');
-        playAgainButton.on('click', gamePlay.restartGame);
-
+        $('#unansweredQuestions').html(unansweredQuestions);    
     },
 
     restartGame: function(){
-        $('#gameContent').show();
-        $('#playAgainButton').on("click", gamePlay.startTime);
+        timer = 5;
+        $('#timeRemaining').html(timer);
+        gamePlay.startTime();
+
     }
     
-}
+};
 
 
 var triviaContent = {
@@ -153,7 +147,6 @@ var triviaContent = {
         }
 
         var doneButton = $('#doneButton');
-        // container.append(doneButton);
         doneButton.on('click', gamePlay.stopTimer);
 
 
@@ -173,6 +166,14 @@ var triviaContent = {
     // }
 
     },
+};
+
+window.onload = function(){
+    var startButton = $('#startButton');
+    startButton.on("click", gamePlay.startTime);
+    var playAgainButton = $('#playAgainButton');
+        playAgainButton.on('click', gamePlay.restartGame);
+
 };
 
 
